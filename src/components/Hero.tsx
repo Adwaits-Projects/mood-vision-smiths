@@ -1,8 +1,11 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Play, ArrowRight } from "lucide-react";
 import heroBackground from "@/assets/hero-background.jpg";
+import { MoodDetectionDemo } from "./MoodDetectionDemo";
 
 export const Hero = () => {
+  const [isDemoOpen, setIsDemoOpen] = useState(false);
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
@@ -45,7 +48,12 @@ export const Hero = () => {
         </div>
 
         <div className="animate-fade-in-up delay-400 flex flex-col sm:flex-row gap-6 justify-center items-center">
-          <Button variant="hero" size="lg" className="text-lg px-8 py-4">
+          <Button 
+            variant="hero" 
+            size="lg" 
+            className="text-lg px-8 py-4"
+            onClick={() => setIsDemoOpen(true)}
+          >
             <Play className="w-5 h-5 mr-2" />
             Try Demo
           </Button>
@@ -59,6 +67,11 @@ export const Hero = () => {
         <div className="absolute -top-20 -left-20 w-40 h-40 bg-primary/20 rounded-full blur-3xl float" />
         <div className="absolute -bottom-20 -right-20 w-60 h-60 bg-accent/20 rounded-full blur-3xl float delay-1000" />
       </div>
+
+      <MoodDetectionDemo 
+        isOpen={isDemoOpen} 
+        onClose={() => setIsDemoOpen(false)} 
+      />
     </section>
   );
 };
